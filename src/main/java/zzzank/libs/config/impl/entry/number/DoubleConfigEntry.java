@@ -2,6 +2,7 @@ package zzzank.libs.config.impl.entry.number;
 
 import org.jetbrains.annotations.NotNull;
 import zzzank.libs.config.api.bound.ConfigBound;
+import zzzank.libs.config.api.entry.ConfigAttribute;
 import zzzank.libs.config.api.entry.ConfigCategory;
 import zzzank.libs.config.impl.entry.AbstractConfigEntry;
 
@@ -17,9 +18,9 @@ public class DoubleConfigEntry extends AbstractConfigEntry<Double> {
         ConfigCategory parent,
         String name,
         ConfigBound<Double> bound,
-        List<String> comments
+        ConfigAttribute attribute
     ) {
-        super(parent, name, bound, comments);
+        super(parent, name, bound, attribute);
     }
 
     @Override

@@ -22,7 +22,7 @@ public interface ConfigEntry<T> extends Supplier<T> {
     void set(@NotNull T newValue);
 
     @NotNull
-    List<String> getComments();
+    ConfigAttribute getAttribute();
 
     @NotNull
     ConfigBound<T> getBound();

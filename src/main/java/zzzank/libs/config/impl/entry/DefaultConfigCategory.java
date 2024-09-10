@@ -18,6 +18,6 @@ public class DefaultConfigCategory extends DefaultConfigEntry<Map<String, Config
         ConfigBound<Map<String, ConfigEntry<?>>> bound,
         List<String> comments
     ) {
-        super(parent, name, bound, comments);
+        super(parent, name, bound);
     }
 }

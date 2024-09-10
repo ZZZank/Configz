@@ -1,6 +1,7 @@
 package zzzank.libs.config.impl.entry;
 
 import org.jetbrains.annotations.NotNull;
+import zzzank.libs.config.api.entry.ConfigAttribute;
 import zzzank.libs.config.api.entry.ConfigCategory;
 import zzzank.libs.config.api.entry.ConfigEntry;
 import zzzank.libs.config.api.bound.ConfigBound;
@@ -15,18 +16,18 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
     protected final ConfigCategory parent;
     protected final String name;
     protected final ConfigBound<T> bound;
-    protected final List<String> comments;
+    protected final ConfigAttribute attribute;
 
     public AbstractConfigEntry(
         ConfigCategory parent,
         String name,
         ConfigBound<T> bound,
-        List<String> comments
+        ConfigAttribute attribute
     ) {
         this.parent = parent;
         this.name = Objects.requireNonNull(name);
         this.bound = Objects.requireNonNull(bound);
-        this.comments = Objects.requireNonNull(comments);
+        this.attribute = attribute;
     }
 
     @Override
@@ -35,8 +36,9 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
     }
 
     @Override
-    public @NotNull List<String> getComments() {
-        return comments;
+    @NotNull
+    public ConfigAttribute getAttribute() {
+        return attribute;
     }
 
     @Override
