@@ -24,6 +24,8 @@ public interface ConfigEntry<T> extends Supplier<T> {
     @NotNull
     ConfigAttribute getAttribute();
 
+    List<ConfigListener<T>> getListeners();
+
     @NotNull
     ConfigBound<T> getBound();
 

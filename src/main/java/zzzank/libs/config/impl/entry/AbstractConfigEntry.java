@@ -1,11 +1,14 @@
 package zzzank.libs.config.impl.entry;
 
+import com.google.common.collect.ImmutableList;
 import org.jetbrains.annotations.NotNull;
 import zzzank.libs.config.api.entry.ConfigAttribute;
 import zzzank.libs.config.api.entry.ConfigCategory;
 import zzzank.libs.config.api.entry.ConfigEntry;
 import zzzank.libs.config.api.bound.ConfigBound;
+import zzzank.libs.config.api.entry.ConfigListener;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -16,6 +19,7 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
     protected final String name;
     protected final ConfigBound<T> bound;
     protected final ConfigAttribute attribute;
+    protected final List<ConfigListener<T>> listeners;
 
     public AbstractConfigEntry(
         ConfigCategory parent,
@@ -23,15 +27,31 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
         ConfigBound<T> bound,
         ConfigAttribute attribute
     ) {
+        this(parent, name, bound, attribute, ImmutableList.of());
+    }
+
+    public AbstractConfigEntry(
+        ConfigCategory parent,
+        String name,
+        ConfigBound<T> bound,
+        ConfigAttribute attribute,
+        List<ConfigListener<T>> listeners
+    ) {
         this.parent = parent;
         this.name = Objects.requireNonNull(name);
         this.bound = Objects.requireNonNull(bound);
         this.attribute = Objects.requireNonNull(attribute);
+        this.listeners = ImmutableList.copyOf(listeners);
     }
 
     @Override
     public @NotNull String getName() {
         return name;
+    }
+
+    @Override
+    public List<ConfigListener<T>> getListeners() {
+        return this.listeners;
     }
 
     @Override
