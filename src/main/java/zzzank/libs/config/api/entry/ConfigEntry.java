@@ -29,6 +29,11 @@ public interface ConfigEntry<T> extends Supplier<T> {
 
     ConfigCategory getParent();
 
+    @NotNull
+    default ConfigRoot getRoot() {
+        return getParent().getRoot();
+    }
+
     /**
      * cast a config entry to a config entry with desired return value type
      * <p>
