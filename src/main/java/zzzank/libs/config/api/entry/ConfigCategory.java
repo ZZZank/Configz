@@ -1,5 +1,6 @@
 package zzzank.libs.config.api.entry;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -8,6 +9,14 @@ import java.util.Map;
  * @author ZZZank
  */
 public interface ConfigCategory extends ConfigEntry<Map<String, ConfigEntry<?>>> {
+
+    /**
+     * calling this method means that you want to replace the entire category and its sub categories,
+     * use at your own risk
+     */
+    @Deprecated
+    @Override
+    void set(@NotNull Map<String, ConfigEntry<?>> newValue);
 
     @Nullable
     default ConfigEntry<?> get(String name) {

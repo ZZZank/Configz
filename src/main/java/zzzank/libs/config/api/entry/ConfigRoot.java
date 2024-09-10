@@ -10,6 +10,12 @@ import java.nio.file.Path;
  */
 public interface ConfigRoot extends ConfigCategory {
 
+    /**
+     * aka config category
+     */
+    @Override
+    @NotNull String getName();
+
     @NotNull
     Class<?> getIdentifier();
 
