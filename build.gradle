@@ -112,6 +112,12 @@ dependencies {
 
     annotationProcessor ('com.cleanroommc:sponge-mixin:0.18.5+mixin.0.8.5')
     */
+    compileOnly("org.jetbrains:annotations:24.0.0")
+
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+    testCompileOnly 'org.projectlombok:lombok:1.18.34'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 }
 
 tasks.withType(JavaCompile).configureEach {
