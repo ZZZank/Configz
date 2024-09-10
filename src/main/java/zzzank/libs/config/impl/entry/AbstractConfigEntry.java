@@ -6,7 +6,6 @@ import zzzank.libs.config.api.entry.ConfigCategory;
 import zzzank.libs.config.api.entry.ConfigEntry;
 import zzzank.libs.config.api.bound.ConfigBound;
 
-import java.util.List;
 import java.util.Objects;
 
 /**

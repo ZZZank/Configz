@@ -10,19 +10,30 @@ import java.nio.file.Path;
  */
 public interface ConfigRoot extends ConfigCategory {
 
-    @Deprecated
-    @Override
-    default ConfigCategory getParent() {
-        return null;
-    }
-
     @NotNull
     Class<?> getIdentifier();
 
     @NotNull
     Path getSavePath();
 
-    void save(@NotNull SaveFormat format);
+    SaveFormat getDefaultFormat();
+
+    void save(@NotNull Path path, @NotNull SaveFormat format);
+
+    default void save() {
+        save(getSavePath(), getDefaultFormat());
+    }
+
+    @Override
+    default ConfigCategory getParent() {
+        return null;
+    }
+
+    @Override
+    @NotNull
+    default ConfigRoot getRoot() {
+        return this;
+    }
 
     @Override
     default boolean isRoot() {

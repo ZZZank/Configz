@@ -3,6 +3,7 @@ package zzzank.libs.config.impl.builder;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import zzzank.libs.config.api.entry.ConfigAttribute;
+import zzzank.libs.config.api.save.SaveFormat;
 import zzzank.libs.config.impl.bound.CategoryBound;
 import zzzank.libs.config.impl.entry.DefaultConfigRoot;
 
@@ -18,6 +19,7 @@ public class ConfigRootBuilder {
     public ConfigAttribute attribute;
     public Class<?> identifier;
     public Path path;
+    public SaveFormat format;
 
     public DefaultConfigRoot build() {
         return new DefaultConfigRoot(
@@ -25,7 +27,8 @@ public class ConfigRootBuilder {
             name,
             new CategoryBound(),
             attribute,
-            path
+            path,
+            format
         );
     }
 }

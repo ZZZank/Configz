@@ -10,7 +10,9 @@ import java.util.Map;
 /**
  * @author ZZZank
  */
-public class DefaultConfigCategory extends DefaultConfigEntry<Map<String, ConfigEntry<?>>> implements ConfigCategory {
+public class DefaultConfigCategory
+    extends DefaultConfigEntry<Map<String, ConfigEntry<?>>>
+    implements ConfigCategory {
 
     public DefaultConfigCategory(
         ConfigCategory parent,
