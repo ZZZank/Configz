@@ -1,34 +1,35 @@
 package zzzank.libs.config.impl;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
 import zzzank.libs.config.api.entry.ConfigRoot;
-
-import java.util.IdentityHashMap;
-import java.util.Map;
+import zzzank.libs.config.natived.ClassBasedConfigGenerator;
 
 /**
  * @author ZZZank
  */
 public class ConfigManager {
 
-    private static final Map<Class<?>, ConfigRoot> ALL = new IdentityHashMap<>();
+    private static final Table<Class<?>, String, ConfigRoot> TABLE = HashBasedTable.create();
+    public static final String DEFAULT_CATEGORY = "general";
 
     public static ConfigRoot register(Class<?> target) {
-        return register(target, scanEntries(target));
+        return register(target, ClassBasedConfigGenerator.scan(target));
     }
 
     public static ConfigRoot register(Class<?> identifier, ConfigRoot root) {
-        if (ALL.containsKey(identifier)) {
+        if (TABLE.contains(identifier, root.getName())) {
             throw new IllegalStateException("already registered");
         }
-        ALL.put(identifier, root);
+        TABLE.put(identifier, root.getName(), root);
         return root;
     }
 
     public static ConfigRoot get(Class<?> identifier) {
-        return ALL.get(identifier);
+        return TABLE.get(identifier, DEFAULT_CATEGORY);
     }
 
-    private static ConfigRoot scanEntries(Class<?> target) {
-        return null;
+    public static ConfigRoot get(Class<?> identifier, String category) {
+        return TABLE.get(identifier, category);
     }
 }
