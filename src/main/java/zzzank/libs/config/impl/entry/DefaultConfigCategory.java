@@ -1,10 +1,10 @@
 package zzzank.libs.config.impl.entry;
 
+import zzzank.libs.config.api.entry.ConfigAttribute;
 import zzzank.libs.config.api.entry.ConfigCategory;
 import zzzank.libs.config.api.entry.ConfigEntry;
 import zzzank.libs.config.api.bound.ConfigBound;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,8 +16,8 @@ public class DefaultConfigCategory extends DefaultConfigEntry<Map<String, Config
         ConfigCategory parent,
         String name,
         ConfigBound<Map<String, ConfigEntry<?>>> bound,
-        List<String> comments
+        ConfigAttribute attribute
     ) {
-        super(parent, name, bound);
+        super(parent, name, bound, attribute);
     }
 }

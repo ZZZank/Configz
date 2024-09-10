@@ -1,14 +1,13 @@
 package zzzank.libs.config.impl.entry;
 
 import org.jetbrains.annotations.NotNull;
-import zzzank.libs.config.api.entry.ConfigCategory;
+import zzzank.libs.config.api.entry.ConfigAttribute;
 import zzzank.libs.config.api.entry.ConfigEntry;
 import zzzank.libs.config.api.entry.ConfigRoot;
 import zzzank.libs.config.api.save.SaveFormat;
 import zzzank.libs.config.api.bound.ConfigBound;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -23,10 +22,10 @@ public class DefaultConfigRoot extends DefaultConfigCategory implements ConfigRo
         Class<?> identifier,
         String name,
         ConfigBound<Map<String, ConfigEntry<?>>> bound,
-        List<String> comments,
+        ConfigAttribute attribute,
         Path path
     ) {
-        super(null, name, bound, comments);
+        super(null, name, bound, attribute);
         this.identifier = Objects.requireNonNull(identifier);
         this.path = Objects.requireNonNull(path);
     }

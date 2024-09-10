@@ -27,7 +27,7 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
         this.parent = parent;
         this.name = Objects.requireNonNull(name);
         this.bound = Objects.requireNonNull(bound);
-        this.attribute = attribute;
+        this.attribute = Objects.requireNonNull(attribute);
     }
 
     @Override

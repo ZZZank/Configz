@@ -14,9 +14,10 @@ public class DefaultConfigEntry<T> extends AbstractConfigEntry<T> {
     public DefaultConfigEntry(
         ConfigCategory parent,
         String name,
-        ConfigBound<T> bound
+        ConfigBound<T> bound,
+        ConfigAttribute attribute
     ) {
-        super(parent, name, bound, new ConfigAttribute(name));
+        super(parent, name, bound, attribute);
         this.value = bound.getDefault();
     }
 

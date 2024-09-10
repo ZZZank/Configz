@@ -8,6 +8,7 @@ import zzzank.libs.config.impl.builder.ConfigAttributeBuilder;
 public record ConfigAttribute(
     boolean requiresMcRestart,
     boolean requiresWorldRestart,
+    boolean hasSlidingControl,
     String displayName,
     String langLey,
     String comment
@@ -17,6 +18,6 @@ public record ConfigAttribute(
     }
 
     public ConfigAttribute(String name) {
-        this(false, false, name, null, null);
+        this(false, false, false, name, null, null);
     }
 }
