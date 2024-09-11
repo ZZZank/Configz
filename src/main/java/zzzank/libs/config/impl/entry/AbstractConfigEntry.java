@@ -1,6 +1,7 @@
 package zzzank.libs.config.impl.entry;
 
 import com.google.common.collect.ImmutableList;
+import lombok.val;
 import org.jetbrains.annotations.NotNull;
 import zzzank.libs.config.api.entry.ConfigAttribute;
 import zzzank.libs.config.api.entry.ConfigCategory;
@@ -43,6 +44,23 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
         this.attribute = Objects.requireNonNull(attribute);
         this.listeners = ImmutableList.copyOf(listeners);
     }
+
+    @Override
+    public void set(@NotNull T newValue) {
+        val oldValue = get();
+        if (!bound.test(newValue)) {
+            //todo: log error
+            setValue(bound.getDefault());
+        } else {
+            setValue(newValue);
+        }
+        listeners.forEach(listener -> listener.onValueSet(this, oldValue));
+    }
+
+    /**
+     *
+     */
+    abstract protected void setValue(@NotNull T newValue);
 
     @Override
     public @NotNull String getName() {

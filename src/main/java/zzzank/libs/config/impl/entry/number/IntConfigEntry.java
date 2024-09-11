@@ -32,11 +32,8 @@ public class IntConfigEntry extends AbstractConfigEntry<Integer> {
         return value;
     }
 
-    public void set(int newValue) {
-    }
-
     @Override
-    public void set(@NotNull Integer newValue) {
-        set(newValue.intValue());
+    protected void setValue(@NotNull Integer newValue) {
+        this.value = newValue;
     }
 }

@@ -27,7 +27,7 @@ public class DefaultConfigEntry<T> extends AbstractConfigEntry<T> {
     }
 
     @Override
-    public void set(@NotNull T newValue) {
-        this.value = bound.adapt(newValue);
+    public void setValue(@NotNull T value) {
+        this.value = value;
     }
 }

@@ -32,11 +32,8 @@ public class DoubleConfigEntry extends AbstractConfigEntry<Double> {
         return value;
     }
 
-    public void set(double newValue) {
-    }
-
     @Override
-    public void set(@NotNull Double newValue) {
-        set(newValue.intValue());
+    protected void setValue(@NotNull Double newValue) {
+        this.value = newValue;
     }
 }
