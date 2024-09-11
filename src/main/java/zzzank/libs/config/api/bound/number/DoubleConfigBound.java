@@ -8,9 +8,9 @@ import zzzank.libs.config.api.bound.RangedConfigBound;
 public interface DoubleConfigBound extends RangedConfigBound<Double> {
 
     @Override
-    default boolean test(Double value) {
-        return value != null
-            && (getMin() == null || getMin() <= value)
-            && (getMax() == null || getMax() >= value);
+    default boolean test(Object value) {
+        return value instanceof Number number
+            && (getMin() == null || getMin() <= number.doubleValue())
+            && (getMax() == null || getMax() >= number.doubleValue());
     }
 }

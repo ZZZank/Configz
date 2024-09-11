@@ -8,9 +8,9 @@ import zzzank.libs.config.api.bound.RangedConfigBound;
 public interface IntConfigBound extends RangedConfigBound<Integer> {
 
     @Override
-    default boolean test(Integer value) {
-        return value != null
-            && (getMin() == null || getMin() <= value)
-            && (getMax() == null || getMax() >= value);
+    default boolean test(Object value) {
+        return value instanceof Number number
+            && (getMin() == null || getMin() <= number.doubleValue())
+            && (getMax() == null || getMax() >= number.doubleValue());
     }
 }

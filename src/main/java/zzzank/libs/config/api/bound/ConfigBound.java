@@ -7,18 +7,20 @@ import java.util.function.Predicate;
 /**
  * @author ZZZank
  */
-public interface ConfigBound<T> extends Predicate<T> {
+public interface ConfigBound<T> {
 
     @NotNull
     T getDefault();
 
-    @Override
-    boolean test(T value);
+    /**
+     * true if {@code value} can be adapted, otherwise false
+     */
+    boolean test(Object value);
 
+    /**
+     * if calling {@link ConfigBound#test(Object)} returns {@code false} for provided object,
+     * this method is guaranteed to return what {@link ConfigBound#getDefault()} returns
+     */
     @NotNull
     T adapt(Object value);
-
-    default boolean isCategory() {
-        return false;
-    }
 }

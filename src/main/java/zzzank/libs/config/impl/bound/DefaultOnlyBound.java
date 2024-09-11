@@ -22,8 +22,8 @@ public class DefaultOnlyBound<T> implements ConfigBound<T> {
     }
 
     @Override
-    public boolean test(T value) {
-        return value != null;
+    public boolean test(Object value) {
+        return this.value.getClass().isInstance(value);
     }
 
     @Override
