@@ -54,13 +54,25 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
         } else {
             setValue(newValue);
         }
-        listeners.forEach(listener -> listener.onValueSet(this, oldValue));
+        listeners.forEach(listener -> listener.postSet(this, oldValue));
     }
 
     /**
      *
      */
     abstract protected void setValue(@NotNull T newValue);
+
+    @Override
+    public @NotNull T get() {
+        T value = getValue();
+        for (val listener : listeners) {
+            value = listener.preGet(this, value);
+        }
+        return value;
+    }
+
+    @NotNull
+    abstract protected T getValue();
 
     @Override
     public @NotNull String getName() {
