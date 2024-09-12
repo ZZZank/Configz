@@ -5,8 +5,7 @@ import lombok.experimental.Accessors;
 import zzzank.libs.config.api.bound.ConfigBound;
 import zzzank.libs.config.api.entry.ConfigAttribute;
 import zzzank.libs.config.api.entry.ConfigCategory;
-import zzzank.libs.config.api.entry.ConfigEntry;
-import zzzank.libs.config.impl.bound.DefaultOnlyBound;
+import zzzank.libs.config.impl.bound.DefaultBound;
 import zzzank.libs.config.impl.entry.DefaultConfigEntry;
 
 import java.util.Objects;
@@ -27,7 +26,7 @@ public class ConfigEntryBuilder<T> {
     }
 
     public static <T> ConfigEntryBuilder<T> of(T defaultValue) {
-        return new ConfigEntryBuilder<T>().setBound(new DefaultOnlyBound<>(defaultValue));
+        return new ConfigEntryBuilder<T>().setBound(new DefaultBound<>(defaultValue));
     }
 
     public DefaultConfigEntry<T> build() {

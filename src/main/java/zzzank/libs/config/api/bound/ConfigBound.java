@@ -21,6 +21,5 @@ public interface ConfigBound<T> {
      * if calling {@link ConfigBound#test(Object)} returns {@code false} for provided object,
      * this method is guaranteed to return what {@link ConfigBound#getDefault()} returns
      */
-    @NotNull
     T adapt(Object value);
 }

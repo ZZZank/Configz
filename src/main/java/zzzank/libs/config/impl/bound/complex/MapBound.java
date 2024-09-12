@@ -1,29 +1,46 @@
-package zzzank.libs.config.impl.bound;
+package zzzank.libs.config.impl.bound.complex;
 
 import lombok.val;
 import org.jetbrains.annotations.NotNull;
 import zzzank.libs.config.api.bound.ConfigBound;
 
-import java.util.Collection;
+import java.util.AbstractMap;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 /**
  * @author ZZZank
  */
-public class CollectBound<T extends Collection<?>> implements ConfigBound<T> {
+public class MapBound<T extends Map<?, ?>> implements ConfigBound<T> {
     private final Supplier<T> supplier;
     private final BiConsumer<T, Object> accumulator;
 
-    public CollectBound(Supplier<T> supplier, BiConsumer<T, Object> accumulator) {
+    public MapBound(Supplier<T> supplier, BiConsumer<T, Object> accumulator) {
         this.supplier = supplier;
         this.accumulator = accumulator;
     }
 
-    public <E> CollectBound(Supplier<T> supplier, BiConsumer<T, E> accumulator, ConfigBound<E> elementBound) {
+    public <K, V> MapBound(
+        Supplier<T> supplier,
+        BiConsumer<T, Map.Entry<K, V>> accumulator,
+        ConfigBound<Map.Entry<K, V>> entryBound
+    ) {
+        this(supplier, (c, o) -> accumulator.accept(c, entryBound.adapt(o)));
+    }
+
+    public <K, V> MapBound(
+        Supplier<T> supplier,
+        BiConsumer<T, Map.Entry<K, V>> accumulator,
+        ConfigBound<K> keyBound,
+        ConfigBound<V> valueBound
+    ) {
         this(
             supplier,
-            (collection, obj) -> accumulator.accept(collection, elementBound.adapt(obj))
+            (collection, obj) -> accumulator.accept(
+                collection,
+                new AbstractMap.SimpleImmutableEntry<>(keyBound.adapt(obj), valueBound.adapt(obj))
+            )
         );
     }
 

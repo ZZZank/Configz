@@ -21,7 +21,7 @@ import java.util.Objects;
 /**
  * @author ZZZank
  */
-public class ClassBasedConfigGenerator {
+public class ConfigGenerator {
 
     public static ConfigRoot scan(Class<?> target) {
         val cfgAnno = target.getAnnotation(Config.class);
@@ -77,6 +77,7 @@ public class ClassBasedConfigGenerator {
             //todo: type adapter
             try {
                 val staticValue = field.get(source);
+                field.getGenericType();
                 val type = field.getType();
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);

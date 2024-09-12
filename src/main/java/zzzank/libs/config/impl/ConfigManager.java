@@ -3,7 +3,7 @@ package zzzank.libs.config.impl;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import zzzank.libs.config.api.entry.ConfigRoot;
-import zzzank.libs.config.natived.ClassBasedConfigGenerator;
+import zzzank.libs.config.natived.ConfigGenerator;
 
 /**
  * @author ZZZank
@@ -14,7 +14,7 @@ public class ConfigManager {
     public static final String DEFAULT_CATEGORY = "general";
 
     public static ConfigRoot register(Class<?> target) {
-        return register(target, ClassBasedConfigGenerator.scan(target));
+        return register(target, ConfigGenerator.scan(target));
     }
 
     public static ConfigRoot register(Class<?> identifier, ConfigRoot root) {
