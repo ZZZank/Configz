@@ -10,7 +10,7 @@ public class DefaultBound<T> implements ConfigBound<T> {
 
     protected final T defaultValue;
 
-    public DefaultBound(T defaultValue) {
+    public DefaultBound(@NotNull T defaultValue) {
         this.defaultValue = defaultValue;
     }
 

@@ -1,4 +1,4 @@
-package zzzank.libs.config.impl.bound.number;
+package zzzank.libs.config.impl.bound.primitive.number;
 
 import zzzank.libs.config.api.bound.number.DoubleConfigBound;
 import zzzank.libs.config.impl.bound.AbstractRangedBound;

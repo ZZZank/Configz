@@ -13,9 +13,7 @@ import zzzank.libs.config.impl.builder.ConfigAttributeBuilder;
 import zzzank.libs.config.impl.builder.ConfigCategoryBuilder;
 import zzzank.libs.config.impl.entry.DefaultConfigRoot;
 
-import java.lang.reflect.AnnotatedElement;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.Objects;
 
 /**
@@ -73,15 +71,32 @@ public class ConfigGenerator {
             //todo: type adapter
             try {
                 val staticValue = field.get(source);
+                if (staticValue == null) {
+                    //todo: more info in error
+                    throw new IllegalStateException("config value must not be null");
+                }
+
                 field.getGenericType();
                 val type = field.getType();
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
             return null;
-        } else if (ConfigEntry.class.isAssignableFrom(field.getType())) {
-            //entry -> inject, attach auto-save listener if required
-
+        } else if (ConfigEntry.class.equals(field.getType())) {
+            //entry interface -> inject default entry, attach auto-save listener if required
+            // there are two possibilities: raw use of ConfigEntry, or ConfigEntry<SomeType>
+            val fullType = field.getGenericType();
+            if (
+                //ConfigEntry<SomeType>
+                fullType instanceof ParameterizedType parameterized
+                    //there should be only one SomeType, obviously
+                    && parameterized.getActualTypeArguments().length == 1
+                    //ConfigEntry<Object> is the same as raw usage
+                    && parameterized.getActualTypeArguments()[0] instanceof Class<?> c
+                    && BoundTypeResolver.hasAdapterFor(c)
+            ) {
+                val ctor = BoundTypeResolver.resolve(c);
+            }
         } else if (Objects.equals(field.getType().getSuperclass(), Object.class)) {
             //class -> category
             val subCategory = ConfigCategoryBuilder.of()
