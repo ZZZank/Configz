@@ -46,11 +46,8 @@ public class ConfigGenerator {
     }
 
     private static void scanClazz(ConfigCategory category, Class<?> target, Object instance) {
-        if (!target.isAnnotationPresent(Config.class)) {
-            return;
-        }
-        for (var field : target.getDeclaredFields()) {
-            var modifier = field.getModifiers();
+        for (val field : target.getDeclaredFields()) {
+            val modifier = field.getModifiers();
             if (
                 !Modifier.isPublic(modifier)
                 || Modifier.isStatic(modifier) != Objects.isNull(instance)
@@ -59,12 +56,11 @@ public class ConfigGenerator {
             ) {
                 continue;
             }
-            val entry = scanField(category, field, instance);
-            category.get().put(entry.getName(), entry);
+            category.addEntry(buildFromField(category, field, instance));
         }
     }
 
-    private static ConfigEntry<?> scanField(ConfigCategory parent, Field field, Object source) {
+    private static ConfigEntry<?> buildFromField(ConfigCategory parent, Field field, Object source) {
         field.setAccessible(true);
         //determine attribute from annotations
         val attributeBuilder = computeAttribute(field);
