@@ -65,8 +65,12 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
     @Override
     public @NotNull T get() {
         T value = getValue();
+        T oldValue = value;
         for (val listener : listeners) {
             value = listener.preGet(this, value);
+        }
+        if (value != oldValue) {
+            setValue(value);
         }
         return value;
     }
