@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * @author ZZZank
  */
-public interface RangedConfigBound<T extends Number> extends ConfigBound<T> {
+public interface RangedConfigBound<T> extends ConfigBound<T> {
 
     @Nullable
     T getMin();
