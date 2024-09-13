@@ -5,6 +5,7 @@ import zzzank.libs.config.api.entry.ConfigCategory;
 import zzzank.libs.config.api.entry.ConfigEntry;
 import zzzank.libs.config.api.bound.ConfigBound;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -20,6 +21,6 @@ public class DefaultConfigCategory
         ConfigBound<Map<String, ConfigEntry<?>>> bound,
         ConfigAttribute attribute
     ) {
-        super(parent, name, bound, attribute);
+        super(parent, name, bound, attribute, Collections.emptyList());
     }
 }

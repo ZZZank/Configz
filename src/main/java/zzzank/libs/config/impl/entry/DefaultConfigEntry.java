@@ -4,6 +4,9 @@ import org.jetbrains.annotations.NotNull;
 import zzzank.libs.config.api.entry.ConfigAttribute;
 import zzzank.libs.config.api.entry.ConfigCategory;
 import zzzank.libs.config.api.bound.ConfigBound;
+import zzzank.libs.config.api.entry.ConfigListener;
+
+import java.util.List;
 
 /**
  * @author ZZZank
@@ -15,9 +18,10 @@ public class DefaultConfigEntry<T> extends AbstractConfigEntry<T> {
         ConfigCategory parent,
         String name,
         ConfigBound<T> bound,
-        ConfigAttribute attribute
+        ConfigAttribute attribute,
+        List<ConfigListener<T>> listeners
     ) {
-        super(parent, name, bound, attribute);
+        super(parent, name, bound, attribute, listeners);
         this.value = bound.getDefault();
     }
 
