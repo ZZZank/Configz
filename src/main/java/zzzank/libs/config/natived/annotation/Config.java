@@ -19,6 +19,8 @@
 
 package zzzank.libs.config.natived.annotation;
 
+import zzzank.libs.config.impl.file.FileFormats;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -52,7 +54,10 @@ public @interface Config {
      */
     String category() default "general";
 
-
+    /**
+     * @see FileFormats.EnumLike#name
+     */
+    String format() default "cfg";
 
     enum Type {
         /**
