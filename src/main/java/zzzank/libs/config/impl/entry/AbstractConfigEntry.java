@@ -54,7 +54,7 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
         } else {
             setValue(newValue);
         }
-        listeners.forEach(listener -> listener.postSet(this, oldValue));
+        listeners.forEach(listener -> listener.postSet(this, oldValue, getValue()));
     }
 
     /**
@@ -70,7 +70,7 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
             value = listener.preGet(this, value);
         }
         if (value != oldValue) {
-            setValue(value);
+            set(value);
         }
         return value;
     }

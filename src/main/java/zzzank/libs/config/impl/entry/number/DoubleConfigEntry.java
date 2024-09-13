@@ -24,7 +24,8 @@ public class DoubleConfigEntry extends AbstractConfigEntry<Double> {
     }
 
     @Override
-    public @NotNull Double get() {
+    @NotNull
+    public Double getValue() {
         return value;
     }
 

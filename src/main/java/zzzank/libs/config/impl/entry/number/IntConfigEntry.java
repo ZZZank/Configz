@@ -24,7 +24,7 @@ public class IntConfigEntry extends AbstractConfigEntry<Integer> {
     }
 
     @Override
-    public @NotNull Integer get() {
+    public @NotNull Integer getValue() {
         return value;
     }
 

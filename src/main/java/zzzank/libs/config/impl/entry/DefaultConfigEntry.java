@@ -22,7 +22,8 @@ public class DefaultConfigEntry<T> extends AbstractConfigEntry<T> {
     }
 
     @Override
-    public @NotNull T get() {
+    @NotNull
+    public T getValue() {
         return value;
     }
 
