@@ -1,7 +1,6 @@
 package zzzank.libs.config.natived;
 
 import lombok.val;
-import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.FieldWrapper;
 import net.minecraftforge.fml.common.Loader;
 import zzzank.libs.config.api.bound.ConfigBound;
@@ -12,6 +11,7 @@ import zzzank.libs.config.api.entry.ConfigRoot;
 import zzzank.libs.config.impl.builder.ConfigAttributeBuilder;
 import zzzank.libs.config.impl.builder.ConfigCategoryBuilder;
 import zzzank.libs.config.impl.entry.DefaultConfigRoot;
+import zzzank.libs.config.natived.annotation.Config;
 
 import java.lang.reflect.*;
 import java.util.Objects;
