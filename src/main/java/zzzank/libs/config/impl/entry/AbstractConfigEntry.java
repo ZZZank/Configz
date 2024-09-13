@@ -39,7 +39,7 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
         List<ConfigListener<T>> listeners
     ) {
         this.parent = parent;
-        this.name = Objects.requireNonNull(name);
+        this.name = ConfigEntry.validateName(name);
         this.bound = Objects.requireNonNull(bound);
         this.attribute = Objects.requireNonNull(attribute);
         this.listeners = ImmutableList.copyOf(listeners);

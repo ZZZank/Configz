@@ -12,6 +12,13 @@ import java.util.function.Supplier;
  */
 public interface ConfigEntry<T> extends Supplier<T> {
 
+    static String validateName(String name) {
+        if (name == null || name.isBlank() || name.contains(".")) {
+            throw new IllegalArgumentException("invalid config entry name");
+        }
+        return name;
+    }
+
     @NotNull
     String getName();
 
