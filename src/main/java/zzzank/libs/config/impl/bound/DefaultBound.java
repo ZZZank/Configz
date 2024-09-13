@@ -3,15 +3,18 @@ package zzzank.libs.config.impl.bound;
 import org.jetbrains.annotations.NotNull;
 import zzzank.libs.config.api.bound.ConfigBound;
 
+import java.util.Objects;
+
 /**
  * @author ZZZank
  */
 public class DefaultBound<T> implements ConfigBound<T> {
 
+    @NotNull
     protected final T defaultValue;
 
     public DefaultBound(@NotNull T defaultValue) {
-        this.defaultValue = defaultValue;
+        this.defaultValue = Objects.requireNonNull(defaultValue);
     }
 
     @Override
