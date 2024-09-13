@@ -1,7 +1,7 @@
 package zzzank.libs.config.api.entry;
 
 import org.jetbrains.annotations.NotNull;
-import zzzank.libs.config.api.save.SaveFormat;
+import zzzank.libs.config.api.file.FileFormat;
 
 import java.nio.file.Path;
 
@@ -22,9 +22,9 @@ public interface ConfigRoot extends ConfigCategory {
     @NotNull
     Path getSavePath();
 
-    SaveFormat getDefaultFormat();
+    FileFormat getDefaultFormat();
 
-    void save(@NotNull Path path, @NotNull SaveFormat format);
+    void save(@NotNull Path path, @NotNull FileFormat format);
 
     default void save() {
         save(getSavePath(), getDefaultFormat());

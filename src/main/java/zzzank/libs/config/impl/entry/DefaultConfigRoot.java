@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import zzzank.libs.config.api.entry.ConfigAttribute;
 import zzzank.libs.config.api.entry.ConfigEntry;
 import zzzank.libs.config.api.entry.ConfigRoot;
-import zzzank.libs.config.api.save.SaveFormat;
+import zzzank.libs.config.api.file.FileFormat;
 import zzzank.libs.config.api.bound.ConfigBound;
 import zzzank.libs.config.impl.builder.ConfigRootBuilder;
 
@@ -18,7 +18,7 @@ import java.util.Objects;
 public class DefaultConfigRoot extends DefaultConfigCategory implements ConfigRoot {
     private final Class<?> identifier;
     private final Path path;
-    private final SaveFormat format;
+    private final FileFormat format;
 
     public static ConfigRootBuilder builder() {
         return new ConfigRootBuilder();
@@ -30,7 +30,7 @@ public class DefaultConfigRoot extends DefaultConfigCategory implements ConfigRo
         ConfigBound<Map<String, ConfigEntry<?>>> bound,
         ConfigAttribute attribute,
         Path path,
-        SaveFormat format
+        FileFormat format
     ) {
         super(null, name, bound, attribute);
         this.identifier = Objects.requireNonNull(identifier);
@@ -44,12 +44,12 @@ public class DefaultConfigRoot extends DefaultConfigCategory implements ConfigRo
     }
 
     @Override
-    public SaveFormat getDefaultFormat() {
+    public FileFormat getDefaultFormat() {
         return format;
     }
 
     @Override
-    public void save(@NotNull Path path, @NotNull SaveFormat format) {
+    public void save(@NotNull Path path, @NotNull FileFormat format) {
 
     }
 
