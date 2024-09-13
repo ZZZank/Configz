@@ -1,4 +1,4 @@
-package zzzank.libs.config.impl.entry.listener;
+package zzzank.libs.config.natived.sync;
 
 import zzzank.libs.config.api.entry.ConfigListener;
 

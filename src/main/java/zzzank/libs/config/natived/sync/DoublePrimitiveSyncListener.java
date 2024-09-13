@@ -1,4 +1,4 @@
-package zzzank.libs.config.impl.entry.listener;
+package zzzank.libs.config.natived.sync;
 
 import org.jetbrains.annotations.NotNull;
 import zzzank.libs.config.api.entry.ConfigEntry;
