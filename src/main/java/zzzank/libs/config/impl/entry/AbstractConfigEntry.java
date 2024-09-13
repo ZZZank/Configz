@@ -47,14 +47,19 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
 
     @Override
     public void set(@NotNull T newValue) {
-        val oldValue = get();
+        val oldValue = getValue();
+        if (newValue == oldValue || oldValue.equals(newValue)) {
+            return;
+        }
         if (!bound.test(newValue)) {
             //todo: log error
             setValue(bound.getDefault());
         } else {
             setValue(newValue);
         }
-        listeners.forEach(listener -> listener.postSet(this, oldValue, getValue()));
+        for (val listener : listeners) {
+            listener.postSet(this, oldValue, getValue());
+        }
     }
 
     /**
@@ -65,13 +70,10 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
     @Override
     public @NotNull T get() {
         T value = getValue();
-        T oldValue = value;
         for (val listener : listeners) {
             value = listener.preGet(this, value);
         }
-        if (value != oldValue) {
-            set(value);
-        }
+        set(value);
         return value;
     }
 

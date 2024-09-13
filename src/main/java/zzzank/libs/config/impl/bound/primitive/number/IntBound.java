@@ -15,4 +15,25 @@ public class IntBound extends AbstractRangedBound<Integer> implements IntConfigB
     public IntBound(Integer defaultValue) {
         this(defaultValue, null, null);
     }
+
+    @Override
+    public boolean test(Object o) {
+        return o instanceof Number || o instanceof Boolean || o instanceof String || o instanceof Character;
+    }
+
+    @Override
+    public Integer adapt(Object value) {
+        return switch (value) {
+            case Number num -> num.intValue();
+            case Boolean b -> b ? 1 : 0;
+            case String str -> {
+                try {
+                    yield Integer.valueOf(str);
+                } catch (NumberFormatException e) {
+                    yield defaultValue;
+                }
+            }
+            case null, default -> defaultValue;
+        };
+    }
 }
