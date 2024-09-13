@@ -16,4 +16,14 @@ public class CategoryBound extends DefaultBound<Map<String, ConfigEntry<?>>> {
     public CategoryBound() {
         super(new LinkedHashMap<>());
     }
+
+    @Override
+    public boolean test(Object value) {
+        return false;
+    }
+
+    @Override
+    public Map<String, ConfigEntry<?>> adapt(Object value) {
+        return defaultValue;
+    }
 }

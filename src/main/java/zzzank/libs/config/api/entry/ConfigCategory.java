@@ -11,10 +11,6 @@ import java.util.Map;
  */
 public interface ConfigCategory extends ConfigEntry<Map<String, ConfigEntry<?>>> {
 
-    /**
-     * calling this method means that you want to replace the entire category and its sub categories,
-     * use at your own risk
-     */
     @Deprecated
     @Override
     void set(@NotNull Map<String, ConfigEntry<?>> newValue);
