@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 public class ShortPrimitiveSyncListener extends FieldSyncListener<Short> {
 
     public ShortPrimitiveSyncListener(Field field, Object instance) {
-        super(field, instance);
+        super(field, instance, short.class);
     }
 
     @Override

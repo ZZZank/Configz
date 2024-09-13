@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 public class DoublePrimitiveSyncListener extends FieldSyncListener<Double> {
 
     public DoublePrimitiveSyncListener(Field field, Object instance) {
-        super(field, instance);
+        super(field, instance, double.class);
     }
 
     @Override

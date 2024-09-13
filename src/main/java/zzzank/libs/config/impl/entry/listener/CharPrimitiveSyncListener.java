@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 public class CharPrimitiveSyncListener extends FieldSyncListener<Character> {
 
     public CharPrimitiveSyncListener(Field field, Object instance) {
-        super(field, instance);
+        super(field, instance, char.class);
     }
 
     @Override

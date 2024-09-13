@@ -9,8 +9,9 @@ import java.lang.reflect.Field;
  * @author ZZZank
  */
 public class ObjectSyncListener<T> extends FieldSyncListener<T> {
-    public ObjectSyncListener(Field field, Object instance) {
-        super(field, instance);
+
+    public ObjectSyncListener(Field field, Object instance, Class<T> expectedType) {
+        super(field, instance, expectedType);
     }
 
     @Override

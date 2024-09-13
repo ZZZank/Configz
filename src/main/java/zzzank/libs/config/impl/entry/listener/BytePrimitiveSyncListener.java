@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 public class BytePrimitiveSyncListener extends FieldSyncListener<Byte> {
 
     public BytePrimitiveSyncListener(Field field, Object instance) {
-        super(field, instance);
+        super(field, instance, byte.class);
     }
 
     @Override

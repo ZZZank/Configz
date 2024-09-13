@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 public class IntPrimitiveSyncListener extends FieldSyncListener<Integer> {
 
     public IntPrimitiveSyncListener(Field field, Object instance) {
-        super(field, instance);
+        super(field, instance, int.class);
     }
 
     @Override

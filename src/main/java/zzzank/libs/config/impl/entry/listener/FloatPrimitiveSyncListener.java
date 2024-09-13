@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 public class FloatPrimitiveSyncListener extends FieldSyncListener<Float> {
 
     public FloatPrimitiveSyncListener(Field field, Object instance) {
-        super(field, instance);
+        super(field, instance, float.class);
     }
 
     @Override
