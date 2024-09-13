@@ -11,10 +11,10 @@ public interface ConfigListener<T> {
      * return a new value if you want to change what this "get" action will return
      */
     @NotNull
-    default T preGet(ConfigEntry<T> entry, T valueToBeReturn) {
-        return valueToBeReturn;
+    default T preGet(ConfigEntry<T> entry, T valueToBeReturned) {
+        return valueToBeReturned;
     }
 
-    default void postSet(ConfigEntry<T> entry, T oldValue) {
+    default void postSet(ConfigEntry<T> entry, T oldValue, T newValue) {
     }
 }

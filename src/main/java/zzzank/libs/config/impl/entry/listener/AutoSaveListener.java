@@ -17,7 +17,7 @@ public class AutoSaveListener<T> implements ConfigListener<T> {
     private AutoSaveListener() {}
 
     @Override
-    public void postSet(ConfigEntry<T> entry, T oldValue) {
+    public void postSet(ConfigEntry<T> entry, T oldValue, T newValue) {
         entry.getRoot().save();
     }
 }
