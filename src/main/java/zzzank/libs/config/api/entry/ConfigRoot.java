@@ -36,12 +36,6 @@ public interface ConfigRoot extends ConfigCategory {
     }
 
     @Override
-    @NotNull
-    default ConfigRoot getRoot() {
-        return this;
-    }
-
-    @Override
     default boolean isRoot() {
         return true;
     }

@@ -40,7 +40,7 @@ public interface ConfigEntry<T> extends Supplier<T> {
 
     @NotNull
     default ConfigRoot getRoot() {
-        return getParent().getRoot();
+        return this instanceof ConfigRoot root ? root : getParent().getRoot();
     }
 
     /**
