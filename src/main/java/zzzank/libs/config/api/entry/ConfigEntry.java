@@ -1,7 +1,9 @@
 package zzzank.libs.config.api.entry;
 
+import lombok.val;
 import org.jetbrains.annotations.NotNull;
 import zzzank.libs.config.api.bound.ConfigBound;
+import zzzank.libs.config.natived.BoundTypeResolver;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +27,26 @@ public interface ConfigEntry<T> extends Supplier<T> {
     @NotNull
     @Override
     T get();
+
+    /**
+     * similar to {@link ConfigEntry#get()}, but return value will be adapted to desired type
+     *
+     * @throws IllegalArgumentException if there's no config bound registered for {@code type}
+     * @throws IllegalStateException    if registered config bound fails to adapt config value in this config entry
+     * @see BoundTypeResolver
+     */
+    default <T2> T2 getAs(Class<T2> type) {
+        val raw = get();
+        val fn = BoundTypeResolver.resolve(type);
+        if (fn == null) {
+            throw new IllegalArgumentException("no config bound registered for type: '%s'".formatted(type));
+        }
+        val parsed = fn.apply(null).adapt(raw);
+        if (parsed == null) { //config bound should never return `null` unless it's default value
+            throw new IllegalStateException("unable to complete value adapting");
+        }
+        return parsed;
+    }
 
     void set(@NotNull T newValue);
 
@@ -67,7 +89,7 @@ public interface ConfigEntry<T> extends Supplier<T> {
      */
     default <C> Optional<ConfigEntry<C>> asEntrySafe(Class<C> type) {
         try {
-            var entry = asEntryFor(type);
+            val entry = asEntryFor(type);
             entry.get(); //access once to catch possible ClassCastException
             return Optional.of(entry);
         } catch (Exception e) {

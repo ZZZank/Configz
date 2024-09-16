@@ -38,11 +38,19 @@ public interface SyncListeners {
         return new ObjectSyncListener<>(field, instance, expectedType);
     }
 
+    static FieldSyncListener<?> ofObject(Field field, Object instance) {
+        return ofObject(field, instance, field.getType());
+    }
+
     static <T> FieldSyncListener<T> of(Field field, Object instance, Class<T> expectedType) {
         var fn = PRIMITIVES.get(expectedType);
         if (fn == null) {
             return ofObject(field, instance, expectedType);
         }
         return (FieldSyncListener<T>) fn.apply(field, instance);
+    }
+
+    static FieldSyncListener<?> of(Field field, Object instance) {
+        return of(field, instance, field.getType());
     }
 }
