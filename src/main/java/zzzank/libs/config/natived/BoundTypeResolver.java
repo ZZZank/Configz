@@ -6,14 +6,13 @@ import zzzank.libs.config.impl.bound.primitive.number.IntBound;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 /**
  * @author ZZZank
  */
 public class BoundTypeResolver {
 
-    private static final Map<Class<?>, Function> ADAPTERS = new HashMap<>();
+    private static final Map<Class<?>, BoundConstructor> ADAPTERS = new HashMap<>();
 
     static {
         register(boolean.class, BoolBound::new);
@@ -55,17 +54,24 @@ public class BoundTypeResolver {
          */
     }
 
-    public static <T> void register(Class<T> type, Function<T, ConfigBound<T>> boundConstructor) {
+    public static <T> void register(Class<T> type, BoundConstructor<T> boundConstructor) {
+        if (ADAPTERS.containsKey(type)) {
+            throw new IllegalArgumentException("already registered");
+        }
         ADAPTERS.put(type, boundConstructor);
     }
 
-    public static <T> Function<T, ConfigBound<T>> resolve(Class<T> type) {
-        return (Function<T, ConfigBound<T>>) ADAPTERS.get(type);
+    public static <T> BoundConstructor<T> resolve(Class<T> type) {
+        return ADAPTERS.get(type);
     }
 
     public static boolean hasAdapterFor(Class<?> type) {
         return ADAPTERS.containsKey(type)
             || Map.class.isAssignableFrom(type)
             || Enum.class.isAssignableFrom(type);
+    }
+
+    public interface BoundConstructor<T> {
+        ConfigBound<T> construct(T defaultValue);
     }
 }

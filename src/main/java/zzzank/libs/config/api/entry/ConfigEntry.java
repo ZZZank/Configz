@@ -41,7 +41,7 @@ public interface ConfigEntry<T> extends Supplier<T> {
         if (fn == null) {
             throw new IllegalArgumentException("no config bound registered for type: '%s'".formatted(type));
         }
-        val parsed = fn.apply(null).adapt(raw);
+        val parsed = fn.construct(null).adapt(raw);
         if (parsed == null) { //config bound should never return `null` unless it's default value
             throw new IllegalStateException("unable to complete value adapting");
         }
