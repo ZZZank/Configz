@@ -1,4 +1,4 @@
-package zzzank.libs.config.impl.bound.complex;
+package zzzank.libs.config.impl.bound.complex.array;
 
 import lombok.val;
 import org.jetbrains.annotations.NotNull;
