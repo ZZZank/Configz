@@ -7,6 +7,10 @@ import zzzank.libs.config.impl.bound.AbstractRangedBound;
  * @author ZZZank
  */
 public class IntBound extends AbstractRangedBound<Integer> implements IntConfigBound {
+    public static final IntBound DEFAULT_ZERO = new IntBound(0);
+    public static final IntBound DEFAULT_NEG1 = new IntBound(-1);
+    public static final IntBound DEFAULT_MIN = new IntBound(Integer.MIN_VALUE);
+    public static final IntBound DEFAULT_MAX = new IntBound(Integer.MAX_VALUE);
 
     public IntBound(Integer defaultValue, Integer min, Integer max) {
         super(defaultValue, min, max);

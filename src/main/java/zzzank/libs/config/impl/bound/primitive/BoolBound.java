@@ -6,6 +6,9 @@ import zzzank.libs.config.impl.bound.DefaultBound;
  * @author ZZZank
  */
 public class BoolBound extends DefaultBound<Boolean> {
+    public static final BoolBound DEFAULT_FALSE = new BoolBound(false);
+    public static final BoolBound DEFAULT_TRUE = new BoolBound(true);
+
     public BoolBound(Boolean defaultValue) {
         super(defaultValue);
     }
