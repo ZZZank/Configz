@@ -4,6 +4,7 @@ import zzzank.libs.config.impl.builder.ConfigAttributeBuilder;
 
 /**
  * @author ZZZank
+ * @param external {@code true} if this config is added by reading config file
  */
 public record ConfigAttribute(
     boolean requiresMcRestart,
@@ -11,13 +12,14 @@ public record ConfigAttribute(
     boolean hasSlidingControl,
     String displayName,
     String langLey,
-    String comment
+    String comment,
+    boolean external
 ) {
     public static ConfigAttributeBuilder builder() {
         return new ConfigAttributeBuilder();
     }
 
     public ConfigAttribute(String name) {
-        this(false, false, false, name, null, null);
+        this(false, false, false, name, null, null, false);
     }
 }
