@@ -1,4 +1,4 @@
-package zzzank.libs.config.impl.bound.complex;
+package zzzank.libs.config.impl.bound.obj;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
