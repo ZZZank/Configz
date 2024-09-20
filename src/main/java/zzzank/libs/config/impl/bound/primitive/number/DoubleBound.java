@@ -1,12 +1,11 @@
 package zzzank.libs.config.impl.bound.primitive.number;
 
-import zzzank.libs.config.api.bound.number.DoubleConfigBound;
 import zzzank.libs.config.impl.bound.AbstractRangedBound;
 
 /**
  * @author ZZZank
  */
-public class DoubleBound extends AbstractRangedBound<Double> implements DoubleConfigBound {
+public class DoubleBound extends AbstractRangedBound<Double> {
     public static final DoubleBound DEFAULT_ZERO = new DoubleBound((double) 0);
     public static final DoubleBound DEFAULT_NEG1 = new DoubleBound((double) -1);
     public static final DoubleBound DEFAULT_MIN = new DoubleBound(Double.MIN_VALUE);

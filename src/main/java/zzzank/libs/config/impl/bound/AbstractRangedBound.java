@@ -5,7 +5,7 @@ import zzzank.libs.config.api.bound.RangedConfigBound;
 /**
  * @author ZZZank
  */
-public abstract class AbstractRangedBound<T> extends DefaultBound<T> implements RangedConfigBound<T> {
+public abstract class AbstractRangedBound<T extends Number> extends DefaultBound<T> implements RangedConfigBound<T> {
     private final T min;
     private final T max;
 
