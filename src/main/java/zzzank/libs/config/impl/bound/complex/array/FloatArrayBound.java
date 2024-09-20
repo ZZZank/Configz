@@ -2,8 +2,7 @@ package zzzank.libs.config.impl.bound.complex.array;
 
 import lombok.val;
 import org.jetbrains.annotations.NotNull;
-import zzzank.libs.config.api.bound.UnifiedTestAdaptBound;
-import zzzank.libs.config.impl.bound.DefaultBound;
+import zzzank.libs.config.impl.bound.UnifiedBound;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -13,7 +12,7 @@ import java.util.Optional;
 /**
  * @author ZZZank
  */
-public class FloatArrayBound extends DefaultBound<float[]> implements UnifiedTestAdaptBound<float[]> {
+public class FloatArrayBound extends UnifiedBound<float[]> {
     public FloatArrayBound(float @NotNull [] defaultValue) {
         super(defaultValue);
     }
