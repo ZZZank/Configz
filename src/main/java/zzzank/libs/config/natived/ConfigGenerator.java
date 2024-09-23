@@ -1,8 +1,10 @@
 package zzzank.libs.config.natived;
 
 import lombok.val;
+import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.FieldWrapper;
 import net.minecraftforge.fml.common.Loader;
+import org.jetbrains.annotations.NotNull;
 import zzzank.libs.config.api.bound.ConfigBound;
 import zzzank.libs.config.api.entry.ConfigAttribute;
 import zzzank.libs.config.api.entry.ConfigCategory;
@@ -10,8 +12,9 @@ import zzzank.libs.config.api.entry.ConfigEntry;
 import zzzank.libs.config.api.entry.ConfigRoot;
 import zzzank.libs.config.impl.builder.ConfigAttributeBuilder;
 import zzzank.libs.config.impl.builder.ConfigCategoryBuilder;
+import zzzank.libs.config.impl.builder.ConfigRootBuilder;
 import zzzank.libs.config.impl.entry.DefaultConfigRoot;
-import zzzank.libs.config.natived.annotation.Config;
+import zzzank.libs.config.natived.annotation.RootConfig;
 
 import java.lang.reflect.*;
 import java.util.Objects;
@@ -41,6 +44,14 @@ public class ConfigGenerator {
         //first level config always uses static member, so instance is null
         scanClazz(root, target, null);
         return root;
+    }
+
+    private static ConfigCategory scanCategory(Class<?> target, Config anno) {
+        return null;
+    }
+
+    private static ConfigRoot scanRoot(Class<?> target, RootConfig rootAnno) {
+        return null;
     }
 
     private static void scanClazz(ConfigCategory category, Class<?> target, Object instance) {
@@ -116,6 +127,20 @@ public class ConfigGenerator {
             field.getName(),
             field.getDeclaringClass().getCanonicalName()
         ));
+    }
+
+    public static ConfigRoot computeRoot(@NotNull Class<?> c, String modid) {
+        val config = c.getAnnotation(Config.class);
+        if (config == null) {
+            throw new IllegalArgumentException("not a config class");
+        }
+        val attribute = computeAttribute(c);
+        val name = config.name().isEmpty() ? modid : config.name();
+        val category = config.category();
+        return ConfigRootBuilder.of()
+            .setName(name)
+            //.setFormat(FileFormats.get(format))
+            .build();
     }
 
     public static ConfigAttributeBuilder computeAttribute(AnnotatedElement annotated) {
