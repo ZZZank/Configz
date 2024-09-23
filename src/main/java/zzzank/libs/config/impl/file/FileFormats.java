@@ -1,6 +1,5 @@
 package zzzank.libs.config.impl.file;
 
-import lombok.AllArgsConstructor;
 import lombok.val;
 import zzzank.libs.config.api.file.FileFormat;
 
@@ -13,11 +12,11 @@ import java.util.Map;
 public class FileFormats {
 
     private static final Map<String, EnumLike<FileFormat>> REGISTERED = new LinkedHashMap<>();
-    public static final EnumLike<TomlFormat> TOML = register(TomlFormat.class, "toml");
-    public static final EnumLike<JsonFormat> JSON = register(JsonFormat.class, "json");
-    public static final EnumLike<CfgFormat> CFG = register(CfgFormat.class, "cfg");
+    public static final EnumLike<TomlFormat> TOML = register(new TomlFormat(), "toml");
+    public static final EnumLike<JsonFormat> JSON = register(new JsonFormat(), "json");
+    public static final EnumLike<CfgFormat> CFG = register(new CfgFormat(), "cfg");
 
-    public static <T extends FileFormat> EnumLike<T> register(Class<T> type, String name) {
+    public static <T extends FileFormat> EnumLike<T> register(T type, String name) {
         if (REGISTERED.containsKey(name)) {
             //todo: more info
             throw new IllegalArgumentException("already registered");
@@ -27,10 +26,10 @@ public class FileFormats {
         return enumLike;
     }
 
-    @AllArgsConstructor
-    public static class EnumLike<T> {
-        public final Class<T> type;
-        public final String name;
-        public final int ordinal;
+    public static FileFormat get(String name) {
+        return REGISTERED.get(name).value;
+    }
+
+    public record EnumLike<T>(T value, String name, int ordinal) {
     }
 }

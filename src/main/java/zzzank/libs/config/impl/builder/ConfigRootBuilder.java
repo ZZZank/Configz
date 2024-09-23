@@ -21,6 +21,10 @@ public class ConfigRootBuilder {
     public Path path;
     public FileFormat format;
 
+    public static ConfigRootBuilder of() {
+        return new ConfigRootBuilder();
+    }
+
     public DefaultConfigRoot build() {
         return new DefaultConfigRoot(
             identifier,

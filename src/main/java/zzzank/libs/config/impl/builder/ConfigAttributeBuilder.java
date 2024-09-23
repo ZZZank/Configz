@@ -21,6 +21,7 @@ public class ConfigAttributeBuilder {
     public String displayName = null;
     public String langLey = null;
     public String[] comments = null;
+    public boolean external = false;
 
     public ConfigAttribute build() {
         val comment = comments == null || comments.length == 0
@@ -35,7 +36,8 @@ public class ConfigAttributeBuilder {
             hasSlidingControl,
             displayName,
             langLey,
-            comment
+            comment,
+            external
         );
     }
 }

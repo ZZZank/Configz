@@ -1,5 +1,6 @@
 package zzzank.libs.config.api.entry;
 
+import lombok.val;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import zzzank.libs.config.impl.builder.ConfigEntryBuilder;
@@ -39,12 +40,12 @@ public interface ConfigCategory extends ConfigEntry<Map<String, ConfigEntry<?>>>
         if (name == null) {
             return null;
         }
-        var parts = name.split("\\.");
+        val parts = name.split("\\.");
         if (parts.length == 1) {
             return get().get(name);
         }
         ConfigEntry<?> entry = this;
-        for (var part : parts) {
+        for (val part : parts) {
             entry = entry.asCategory().get(part);
         }
         return entry;

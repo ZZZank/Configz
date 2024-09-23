@@ -6,18 +6,16 @@ import zzzank.libs.config.api.file.FileFormat;
 import java.nio.file.Path;
 
 /**
+ * holds multiple config categories
  * @author ZZZank
  */
 public interface ConfigRoot extends ConfigCategory {
 
     /**
-     * aka config category
+     * config name, default to modid, also used as file name
      */
     @Override
     @NotNull String getName();
-
-    @NotNull
-    Class<?> getIdentifier();
 
     @NotNull
     Path getSavePath();

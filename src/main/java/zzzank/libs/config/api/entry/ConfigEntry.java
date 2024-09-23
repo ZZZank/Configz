@@ -28,6 +28,10 @@ public interface ConfigEntry<T> extends Supplier<T> {
     @Override
     T get();
 
+    default <T2> T2 getAs(@NotNull ConfigBound<T2> bound) {
+        return bound.adapt(get());
+    }
+
     /**
      * similar to {@link ConfigEntry#get()}, but return value will be adapted to desired type
      *
@@ -35,8 +39,11 @@ public interface ConfigEntry<T> extends Supplier<T> {
      * @throws IllegalStateException    if registered config bound fails to adapt config value in this config entry
      * @see BoundTypeResolver
      */
-    default <T2> T2 getAs(Class<T2> type) {
+    default <T2> T2 getAs(@NotNull Class<T2> type) {
         val raw = get();
+        if (type.isInstance(raw)) {
+            return (T2) raw;
+        }
         val fn = BoundTypeResolver.resolve(type);
         if (fn == null) {
             throw new IllegalArgumentException("no config bound registered for type: '%s'".formatted(type));
@@ -57,6 +64,10 @@ public interface ConfigEntry<T> extends Supplier<T> {
 
     @NotNull
     ConfigBound<T> getBound();
+
+    default T getDefaultValue() {
+        return getBound().getDefault();
+    }
 
     ConfigCategory getParent();
 
@@ -90,7 +101,7 @@ public interface ConfigEntry<T> extends Supplier<T> {
     default <C> Optional<ConfigEntry<C>> asEntrySafe(Class<C> type) {
         try {
             val entry = asEntryFor(type);
-            entry.get(); //access once to catch possible ClassCastException
+            C tmp = entry.get(); //access once to catch possible ClassCastException
             return Optional.of(entry);
         } catch (Exception e) {
             return Optional.empty();

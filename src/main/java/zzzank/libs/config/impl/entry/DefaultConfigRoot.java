@@ -52,9 +52,4 @@ public class DefaultConfigRoot extends DefaultConfigCategory implements ConfigRo
     public void save(@NotNull Path path, @NotNull FileFormat format) {
 
     }
-
-    @Override
-    public @NotNull Class<?> getIdentifier() {
-        return identifier;
-    }
 }
