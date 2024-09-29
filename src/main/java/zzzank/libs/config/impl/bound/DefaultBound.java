@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * @author ZZZank
  */
-public class DefaultBound<T> implements ConfigBound<T> {
+public abstract class DefaultBound<T> implements ConfigBound<T> {
 
     @NotNull
     protected final T defaultValue;
@@ -18,17 +18,12 @@ public class DefaultBound<T> implements ConfigBound<T> {
     }
 
     @Override
-    public @NotNull T provideDefault() {
-        return defaultValue;
-    }
-
-    @Override
     public boolean test(Object value) {
         return this.defaultValue.getClass().isInstance(value);
     }
 
     @Override
     public T adapt(Object value) {
-        return value.getClass().isInstance(value) ? (T) value : this.defaultValue;
+        return test(value) ? (T) value : this.defaultValue;
     }
 }
