@@ -27,12 +27,12 @@ public class DefaultConfigEntry<T> extends AbstractConfigEntry<T> {
 
     @Override
     @NotNull
-    public T getValue() {
+    public T getImpl() {
         return value;
     }
 
     @Override
-    public void setValue(@NotNull T value) {
+    public void setImpl(@NotNull T value) {
         this.value = value;
     }
 }

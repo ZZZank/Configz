@@ -46,30 +46,27 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
     }
 
     @Override
-    public void set(@NotNull T newValue) {
-        val oldValue = getValue();
+    public final void set(@NotNull T newValue) {
+        val oldValue = getImpl();
         if (newValue == oldValue || oldValue.equals(newValue)) {
             return;
         }
         if (!bound.test(newValue)) {
             //todo: log error
-            setValue(bound.provideDefault());
+            setImpl(bound.provideDefault());
         } else {
-            setValue(newValue);
+            setImpl(newValue);
         }
         for (val listener : listeners) {
-            listener.postSet(this, oldValue, getValue());
+            listener.postSet(this, oldValue, getImpl());
         }
     }
 
-    /**
-     *
-     */
-    abstract protected void setValue(@NotNull T newValue);
+    abstract protected void setImpl(@NotNull T newValue);
 
     @Override
-    public @NotNull T get() {
-        T value = getValue();
+    public final @NotNull T get() {
+        T value = getImpl();
         for (val listener : listeners) {
             value = listener.preGet(this, value);
         }
@@ -78,7 +75,7 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
     }
 
     @NotNull
-    abstract protected T getValue();
+    abstract protected T getImpl();
 
     @Override
     public @NotNull String getName() {
