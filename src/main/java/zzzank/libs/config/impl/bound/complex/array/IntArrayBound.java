@@ -18,6 +18,11 @@ public class IntArrayBound extends UnifiedBound<int[]> {
     }
 
     @Override
+    public int @NotNull [] provideDefault() {
+        return Arrays.copyOf(defaultValue, defaultValue.length);
+    }
+
+    @Override
     public Optional<int[]> tryAdapt(Object o) {
         if (o == null) {
             return Optional.empty();

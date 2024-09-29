@@ -1,12 +1,12 @@
 package zzzank.libs.config.impl.bound.obj;
 
 import org.jetbrains.annotations.NotNull;
-import zzzank.libs.config.impl.bound.DefaultBound;
+import zzzank.libs.config.impl.bound.DefaultImmutableBound;
 
 /**
  * @author ZZZank
  */
-public class StrBound extends DefaultBound<String> {
+public class StrBound extends DefaultImmutableBound<String> {
     public static final StrBound DEFAULT_EMPTY = new StrBound("");
 
     private final boolean strictCheck;

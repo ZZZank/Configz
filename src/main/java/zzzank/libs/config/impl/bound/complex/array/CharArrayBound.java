@@ -18,6 +18,11 @@ public class CharArrayBound extends UnifiedBound<char[]> {
     }
 
     @Override
+    public char @NotNull [] provideDefault() {
+        return Arrays.copyOf(defaultValue, defaultValue.length);
+    }
+
+    @Override
     public Optional<char[]> tryAdapt(Object o) {
         if (o == null) {
             return Optional.empty();

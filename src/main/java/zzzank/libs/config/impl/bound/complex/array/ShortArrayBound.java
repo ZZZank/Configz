@@ -18,6 +18,11 @@ public class ShortArrayBound extends UnifiedBound<short[]> {
     }
 
     @Override
+    public short @NotNull [] provideDefault() {
+        return Arrays.copyOf(defaultValue, defaultValue.length);
+    }
+
+    @Override
     public Optional<short[]> tryAdapt(Object o) {
         if (o == null) {
             return Optional.empty();

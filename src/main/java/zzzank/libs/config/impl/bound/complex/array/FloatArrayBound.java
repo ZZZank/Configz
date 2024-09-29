@@ -18,6 +18,11 @@ public class FloatArrayBound extends UnifiedBound<float[]> {
     }
 
     @Override
+    public float @NotNull [] provideDefault() {
+        return Arrays.copyOf(defaultValue, defaultValue.length);
+    }
+
+    @Override
     public Optional<float[]> tryAdapt(Object o) {
         if (o == null) {
             return Optional.empty();

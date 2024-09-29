@@ -18,6 +18,11 @@ public class LongArrayBound extends UnifiedBound<long[]> {
     }
 
     @Override
+    public long @NotNull [] provideDefault() {
+        return Arrays.copyOf(defaultValue, defaultValue.length);
+    }
+
+    @Override
     public Optional<long[]> tryAdapt(Object o) {
         if (o == null) {
             return Optional.empty();

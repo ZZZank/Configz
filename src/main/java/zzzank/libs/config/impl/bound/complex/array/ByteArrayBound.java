@@ -18,6 +18,11 @@ public class ByteArrayBound extends UnifiedBound<byte[]> {
     }
 
     @Override
+    public byte @NotNull [] provideDefault() {
+        return Arrays.copyOf(defaultValue, defaultValue.length);
+    }
+
+    @Override
     public Optional<byte[]> tryAdapt(Object o) {
         if (o == null) {
             return Optional.empty();

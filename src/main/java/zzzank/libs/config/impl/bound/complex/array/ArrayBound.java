@@ -7,6 +7,7 @@ import zzzank.libs.config.impl.bound.UnifiedBound;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -27,6 +28,11 @@ public class ArrayBound<T> extends UnifiedBound<T[]> {
         this.memberBound = Objects.requireNonNull(memberBound);
         this.typeRef = (T[]) Array.newInstance(defaultValue.getClass().componentType(), 0);
         this.skipDefault = skipDefault;
+    }
+
+    @Override
+    public T @NotNull [] provideDefault() {
+        return Arrays.copyOf(defaultValue, defaultValue.length);
     }
 
     @Override

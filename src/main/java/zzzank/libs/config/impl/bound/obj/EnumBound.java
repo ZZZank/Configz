@@ -1,21 +1,17 @@
 package zzzank.libs.config.impl.bound.obj;
 
+import lombok.val;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import zzzank.libs.config.impl.bound.TypedBound;
+import zzzank.libs.config.impl.bound.DefaultImmutableBound;
 
 import java.util.Objects;
 
 /**
  * @author ZZZank
  */
-public class EnumBound<T extends Enum<T>> extends TypedBound<T> {
+public class EnumBound<T extends Enum<T>> extends DefaultImmutableBound<T> {
     public EnumBound(@NotNull T defaultValue) {
-        super(Objects.requireNonNull(defaultValue), (Class<T>) defaultValue.getClass());
-    }
-
-    public EnumBound(@Nullable T defaultValue, @NotNull Class<T> type) {
-        super(defaultValue, type);
+        super(Objects.requireNonNull(defaultValue));
     }
 
     @Override
@@ -25,10 +21,14 @@ public class EnumBound<T extends Enum<T>> extends TypedBound<T> {
 
     @Override
     public T adapt(Object value) {
-        if (super.test(value)) {
+        if (!super.test(value)) {
+            return defaultValue;
+        }
+        val type = (Class<T>) defaultValue.getClass();
+        if (type.isInstance(value)) {
             return (T) value;
         } else if (value instanceof CharSequence) {
-            return Enum.valueOf(type, value.toString());
+            return Enum.valueOf((Class<T>) defaultValue.getClass(), value.toString());
         }
         return defaultValue;
     }

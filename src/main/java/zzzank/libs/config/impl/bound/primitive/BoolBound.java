@@ -1,11 +1,11 @@
 package zzzank.libs.config.impl.bound.primitive;
 
-import zzzank.libs.config.impl.bound.DefaultBound;
+import zzzank.libs.config.impl.bound.DefaultImmutableBound;
 
 /**
  * @author ZZZank
  */
-public class BoolBound extends DefaultBound<Boolean> {
+public class BoolBound extends DefaultImmutableBound<Boolean> {
     public static final BoolBound DEFAULT_FALSE = new BoolBound(false);
     public static final BoolBound DEFAULT_TRUE = new BoolBound(true);
 

@@ -18,6 +18,11 @@ public class DoubleArrayBound extends UnifiedBound<double[]> {
     }
 
     @Override
+    public double @NotNull [] provideDefault() {
+        return Arrays.copyOf(defaultValue, defaultValue.length);
+    }
+
+    @Override
     public Optional<double[]> tryAdapt(Object o) {
         if (o == null) {
             return Optional.empty();

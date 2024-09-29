@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import zzzank.libs.config.impl.bound.UnifiedBound;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -14,6 +15,11 @@ import java.util.Optional;
 public class BoolArrayBound extends UnifiedBound<boolean[]> {
     public BoolArrayBound(boolean @NotNull [] defaultValue) {
         super(defaultValue);
+    }
+
+    @Override
+    public boolean @NotNull [] provideDefault() {
+        return Arrays.copyOf(defaultValue, defaultValue.length);
     }
 
     @Override
