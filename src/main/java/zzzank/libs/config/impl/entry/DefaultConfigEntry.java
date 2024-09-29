@@ -22,7 +22,7 @@ public class DefaultConfigEntry<T> extends AbstractConfigEntry<T> {
         List<ConfigListener<T>> listeners
     ) {
         super(parent, name, bound, attribute, listeners);
-        this.value = bound.getDefault();
+        this.value = bound.provideDefault();
     }
 
     @Override

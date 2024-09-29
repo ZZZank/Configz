@@ -66,7 +66,7 @@ public interface ConfigEntry<T> extends Supplier<T> {
     ConfigBound<T> getBound();
 
     default T getDefaultValue() {
-        return getBound().getDefault();
+        return getBound().provideDefault();
     }
 
     ConfigCategory getParent();

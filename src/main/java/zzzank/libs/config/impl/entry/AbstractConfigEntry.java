@@ -53,7 +53,7 @@ public abstract class AbstractConfigEntry<T> implements ConfigEntry<T> {
         }
         if (!bound.test(newValue)) {
             //todo: log error
-            setValue(bound.getDefault());
+            setValue(bound.provideDefault());
         } else {
             setValue(newValue);
         }

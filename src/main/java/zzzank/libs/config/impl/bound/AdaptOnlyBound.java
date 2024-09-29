@@ -24,13 +24,13 @@ public class AdaptOnlyBound<T> extends DefaultBound<T> {
         try {
             return adapter.apply(value);
         } catch (Exception e) {
-            return getDefault();
+            return provideDefault();
         }
     }
 
     public interface Adapter<T> {
         /**
-         * any exception thrown will make the {@link AdaptOnlyBound} that holds the adapter return {@link AdaptOnlyBound#getDefault()}
+         * any exception thrown will make the {@link AdaptOnlyBound} that holds the adapter return {@link AdaptOnlyBound#provideDefault()}
          */
         T apply(Object value) throws Exception;
     }

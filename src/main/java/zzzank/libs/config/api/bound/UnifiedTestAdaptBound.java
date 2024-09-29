@@ -14,7 +14,7 @@ public interface UnifiedTestAdaptBound<T> extends ConfigBound<T> {
 
     @Override
     default T adapt(Object value) {
-        return tryAdapt(value).orElse(getDefault());
+        return tryAdapt(value).orElse(provideDefault());
     }
 
     Optional<T> tryAdapt(Object o);

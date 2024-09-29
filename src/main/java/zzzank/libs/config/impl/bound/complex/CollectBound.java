@@ -35,7 +35,7 @@ public class CollectBound<T extends Collection<?>> extends DefaultBound<T> {
     }
 
     @Override
-    public @NotNull T getDefault() {
+    public @NotNull T provideDefault() {
         return supplier.get();
     }
 
@@ -48,7 +48,7 @@ public class CollectBound<T extends Collection<?>> extends DefaultBound<T> {
     public @NotNull T adapt(Object value) {
         val adapted = supplier.get();
         if (!test(value)) {
-            return getDefault();
+            return provideDefault();
         }
         for (val o : (Iterable<?>) value) {
             accumulator.accept(adapted, o);

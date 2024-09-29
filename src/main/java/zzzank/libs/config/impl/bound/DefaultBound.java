@@ -18,7 +18,7 @@ public class DefaultBound<T> implements ConfigBound<T> {
     }
 
     @Override
-    public @NotNull T getDefault() {
+    public @NotNull T provideDefault() {
         return defaultValue;
     }
 
